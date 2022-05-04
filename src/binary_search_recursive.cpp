@@ -16,19 +16,14 @@ namespace assignment {
     if (left_index > right_index) {
       return std::nullopt;
     }
-    int middle = left_index + (right_index-left_index)/2;
+    int middle = (right_index+left_index)/2;
     if (data[middle] == search_element) {
       return middle;
     }
-    if (search_element > data[middle]) {
-      left_index = middle+1;
-      return recursive_helper(data,search_element,left_index,right_index);
-    }
     if (search_element < data[middle]) {
-      right_index = middle;
-      return recursive_helper(data, search_element,left_index, right_index);
+      return recursive_helper(data, search_element,left_index, middle-1);
     }
-
+    return recursive_helper(data,search_element,middle+1,right_index);
     // Tips:
     // 1. Рассмотрите базовые случаи выхода и рекурсии:
     //    1) индекс левого элемента стал больше индекса правого элемента
